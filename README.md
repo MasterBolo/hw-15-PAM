@@ -45,7 +45,7 @@ passwd: password updated successfully
 ``` root@pam:~# groupadd -f admin
 root@pam:~# usermod otusadm -a -G admin && usermod root -a -G admin && usermod vagrant -a -G admin
 ```
-Проверяем возможность подключения по ssh c хостовой машины к гостевой, для пользователей "otus" и "otusadm":
+Проверяем возможность подключения по ssh c хостовой машины к гостевой для пользователей "otus" и "otusadm":
 
 ``` [nur@test hw-15-pam]$ ssh otus@192.168.56.13
 otus@192.168.56.13's password: 
@@ -66,12 +66,12 @@ Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-102-generic x86_64)
 
 ## Запрещаем всем пользователям кроме группы admin логин в выходные (суббота и воскресенье), без учета праздников
 
-Проверим, что пользователи root, vagrant и otusadm есть в группе admin:
+Проверим что пользователи root, vagrant и otusadm есть в группе admin:
 
 ``` root@pam:~# cat /etc/group | grep admin
 admin:x:1003:otusadm,root,vagrant
 ```
-Далее настроим правило, по которому все пользователи кроме тех, что указаны в группе admin не смогут подключаться в выходные дни, для этого,
+Далее настроим правило, по которому все пользователи кроме тех, что указаны в группе admin не смогут подключаться в выходные дни, для этого
 создадим файл-скрипт по пути: /usr/local/bin/login.sh для использования его модулем pam_exec, пример скрипта берём из методички.
 
 Добавим права на исполнение файла:
